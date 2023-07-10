@@ -1,0 +1,43 @@
+server:
+  port: 8083
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: root
+      url: jdbc:mysql://121.37.71.228:3308/taxi_dtx_order?characterEncoding=utf-8&serverTimezone=GMT%2B8
+  application:
+    name: service-order1
+
+  cloud:
+    nacos:
+      discovery:
+        namespace: dtx
+        server-addr: 127.0.0.1:8848
+
+  kafka:
+    consumer:
+      bootstrap-servers: 116.204.74.74:9092
+      max-poll-records: 30
+      fetch-min-size: 32000
+      properties:
+        auto:
+          offset:
+            reset: latest
+        enable:
+          auto:
+            commit: false
+    listener:
+      ack-mode: manual
+      concurrency: 3
+
+mybatis:
+  mapper-locations: classpath:/mapper/**.xml
+
+logging:
+  level:
+    com.erato.serviceorder1.dao: debug
+

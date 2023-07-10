@@ -1,0 +1,34 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: root
+      url: jdbc:mysql://121.37.71.228:3308/taxi_dtx_pay?characterEncoding=utf-8&serverTimezone=GMT%2B8
+
+  application:
+    name: service-pay
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: dtx
+
+  kafka:
+    producer:
+      bootstrap-servers: 116.204.74.74:9092
+      retries: 3
+      acks: 1
+
+
+mybatis:
+  mapper-locations: classpath:/mapper/**.xml
+
+logging:
+  level:
+    com.erato.servicepay.dao: debug
